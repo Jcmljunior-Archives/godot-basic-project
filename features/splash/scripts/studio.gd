@@ -8,12 +8,12 @@ onready var audio: AudioStreamPlayer = $audio
 
 # APÓS O TEMPORIZADOR TERMINAR, INICIA-SE A ANIMAÇÃO DE TRANSIÇÃO.
 func _on_timer_timeout() -> void:
-	animation.play("transition_in")
+	animation.play("default")
 
 
 # APÓS O TERMINO DA ANIMAÇÃO DO PLANO DE FUNDO, MUDA O CENÁRIO.
 func _on_background_animation_finished(anim_name: String) -> void:
-	if not anim_name == "transition_in": return
+	if not anim_name == "default": return
 	assert(next_scene.can_instance())
 	get_tree().change_scene_to(next_scene)
 

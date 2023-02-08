@@ -11,13 +11,13 @@ onready var button_exit: Button = get_node("content/vmenu/button_exit")
 
 
 func _ready() -> void:
-	update_locale()
-	align_center_vmenu(vmenu.get_minimum_size())	
+	_update_locale()
+	align_center_vmenu(vmenu.get_minimum_size())
 	button_start.grab_focus()
 
 
 # INICIALIZAÇÃO DA TRADUÇÃO DE ELEMENTOS.
-func update_locale() -> void:
+func _update_locale() -> void:
 	logo.text = tr("INTRO_DISPLAY_PROJECT")
 	button_start.text = tr("INTRO_BUTTON_START_GAME")
 	button_settings.text = tr("INTRO_BUTTON_SETTINGS")
@@ -36,15 +36,18 @@ func align_center_vmenu(size: Vector2) -> void:
 	vmenu.margin_left = -size.x / 2
 
 
+# COMEÇA O JOGO
 func _on_button_start_pressed() -> void:
 	assert(next_scene.can_instance())
 	get_tree().change_scene_to(next_scene)
 
 
+# ACESSA A CENA DE CONFIGURAÇÕES.
 func _on_button_settings_pressed() -> void:
 	assert(settings_scene.can_instance())
 	get_tree().change_scene_to(settings_scene)
 
 
+# FECHA O JOGO
 func _on_button_exit_pressed() -> void:
 	get_tree().quit()
