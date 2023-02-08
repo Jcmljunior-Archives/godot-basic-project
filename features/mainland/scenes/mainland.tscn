@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://features/splash/themes/ft_logo.tres" type="DynamicFont" id=1]
+[ext_resource path="res://features/mainland/scripts/mainland.gd" type="Script" id=2]
+
+[node name="mainland" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -18.5
+margin_right = 32.0
+margin_bottom = 18.5
+custom_fonts/font = ExtResource( 1 )
+text = "........"
