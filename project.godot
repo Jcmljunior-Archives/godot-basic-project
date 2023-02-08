@@ -79,7 +79,7 @@ reload={
 
 [locale]
 
-translations=PoolStringArray(  )
+translations=PoolStringArray( "res://features/i18n/i18n.en_US.translation", "res://features/i18n/i18n.pt_BR.translation" )
 locale_filter=[ 1, [ "en_US", "pt_BR" ] ]
 
 [physics]
