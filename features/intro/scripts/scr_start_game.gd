@@ -4,6 +4,7 @@ export (PackedScene) var next_scene: PackedScene
 export (PackedScene) var settings_scene: PackedScene
 
 onready var vmenu: VBoxContainer = get_node("content/vmenu")
+onready var logo: Label = get_node("content/logo")
 onready var button_start: Button = get_node("content/vmenu/button_start")
 onready var button_settings: Button = get_node("content/vmenu/button_settings")
 onready var button_exit: Button = get_node("content/vmenu/button_exit")
@@ -15,6 +16,7 @@ func _ready() -> void:
 
 # INICIALIZAÇÃO DA TRADUÇÃO DE ELEMENTOS.
 func update_locale() -> void:
+	logo.text = tr("INTRO_DISPLAY_PROJECT")
 	button_start.text = tr("INTRO_BUTTON_START_GAME")
 	button_settings.text = tr("INTRO_BUTTON_SETTINGS")
 	button_exit.text = tr("INTRO_BUTTON_EXIT")
@@ -36,4 +38,4 @@ func select_button(position: int) -> void:
 	(vmenu.get_children()[position] as Button).grab_focus()
 
 func select_first_button() -> void:
-	(vmenu.get_children()[0] as Button).grab_focus()
+	select_button(0)
