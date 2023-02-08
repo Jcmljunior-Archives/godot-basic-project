@@ -46,8 +46,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 24
 
-[node name="title" type="Label" parent="content/grid"]
+[node name="hbox" type="HBoxContainer" parent="content/grid"]
 margin_right = 912.0
+margin_bottom = 28.0
+
+[node name="button_back" type="Button" parent="content/grid/hbox"]
+margin_right = 42.0
+margin_bottom = 28.0
+text = "Back"
+
+[node name="title" type="Label" parent="content/grid/hbox"]
+margin_left = 46.0
+margin_right = 162.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 1 )
 text = "Settings"
@@ -100,6 +110,7 @@ text = "Display FPS"
 margin_left = 126.0
 margin_right = 202.0
 margin_bottom = 40.0
+pressed = true
 
 [node name="Audio" type="Tabs" parent="content/grid/tab_container"]
 visible = false
@@ -161,4 +172,5 @@ custom_fonts/font = SubResource( 8 )
 text = "max"
 uppercase = true
 
+[connection signal="pressed" from="content/grid/hbox/button_back" to="." method="_on_button_back_pressed"]
 [connection signal="pressed" from="content/grid/tab_container/Video/content/grid/vbox/check" to="." method="_on_check_pressed"]
