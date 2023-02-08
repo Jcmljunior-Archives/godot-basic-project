@@ -12,8 +12,8 @@ onready var button_exit: Button = get_node("content/vmenu/button_exit")
 
 func _ready() -> void:
 	update_locale()
-	align_center_vmenu(vmenu.get_minimum_size())
-	select_first_button()
+	align_center_vmenu(vmenu.get_minimum_size())	
+	button_start.grab_focus()
 
 
 # INICIALIZAÇÃO DA TRADUÇÃO DE ELEMENTOS.
@@ -34,17 +34,6 @@ func align_center_vmenu(size: Vector2) -> void:
 	vmenu.margin_bottom = -size.y / 2
 	vmenu.margin_right = -size.x / 2
 	vmenu.margin_left = -size.x / 2
-
-
-# SELECIONA UM BOTÃO COM BASE EM SUA POSIÇÃO
-func select_button(position: int) -> void:
-	var nodes = vmenu.get_children()
-	assert(nodes.size() >= position)
-	(vmenu.get_children()[position] as Button).grab_focus()
-
-
-func select_first_button() -> void:
-	select_button(0)
 
 
 func _on_button_start_pressed() -> void:

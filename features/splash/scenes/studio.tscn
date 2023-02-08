@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://features/splash/themes/ft_logo.tres" type="DynamicFont" id=1]
-[ext_resource path="res://features/splash/themes/sty_logo.tres" type="StyleBox" id=2]
-[ext_resource path="res://features/splash/scripts/scr_studio.gd" type="Script" id=3]
-[ext_resource path="res://features/intro/scenes/sce_start_game.tscn" type="PackedScene" id=4]
+[ext_resource path="res://features/splash/scripts/studio.gd" type="Script" id=1]
+[ext_resource path="res://features/splash/themes/ft_logo.tres" type="DynamicFont" id=2]
+[ext_resource path="res://features/splash/themes/sty_logo.tres" type="StyleBox" id=3]
+[ext_resource path="res://features/splash/sounds/logo.wav" type="AudioStream" id=4]
+[ext_resource path="res://features/intro/scenes/sce_start_game.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -30,7 +31,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
@@ -48,12 +49,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "transition_in"
-length = 2.2
+resource_name = "default"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -61,17 +61,17 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="studio" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 3 )
-next_scene = ExtResource( 4 )
+script = ExtResource( 1 )
+next_scene = ExtResource( 5 )
 
 [node name="background" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -82,33 +82,32 @@ color = Color( 0, 0, 0, 1 )
 anims/RESET = SubResource( 1 )
 anims/transition_in = SubResource( 2 )
 
-[node name="content" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 24.0
-margin_right = -24.0
-margin_bottom = -24.0
-
-[node name="logo" type="Label" parent="content"]
-modulate = Color( 0, 0, 0, 1 )
+[node name="logo" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -117.5
+margin_left = -97.0
 margin_top = -24.5
-margin_right = 117.5
+margin_right = 97.0
 margin_bottom = 24.5
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 3 )
 text = "Studio Logo"
-uppercase = true
 
-[node name="animation" type="AnimationPlayer" parent="content/logo"]
-autoplay = "transition_in"
+[node name="animation" type="AnimationPlayer" parent="logo"]
+autoplay = "default"
 anims/RESET = SubResource( 3 )
-anims/transition_in = SubResource( 4 )
+anims/default = SubResource( 4 )
+
+[node name="audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="animation_finished" from="background/animation" to="." method="_on_background_animation_finished"]
-[connection signal="animation_finished" from="content/logo/animation" to="." method="_on_logo_animation_finished"]
+[connection signal="animation_finished" from="logo/animation" to="." method="_on_logo_animation_finished"]
+[connection signal="finished" from="audio" to="." method="_on_audio_finished"]
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
