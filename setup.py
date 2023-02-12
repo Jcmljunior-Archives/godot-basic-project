@@ -5,6 +5,8 @@ import shutil
 path = os.getcwd()
 words = []
 
+file_name = "i18n.pot"
+
 # Efetua uma busca por todos os arquivos contido em cada diretório relacionado a extensão informada.
 def list_files_in_directory_by_extension(extension):
     list_files = []
@@ -69,5 +71,5 @@ def move_generated_file(path):
         shutil.move(os.path.join(path), os.path.join("features", "i18n", path))
 
 read_files_in_directory_by_extension(".tscn", "text")
-generate_file_in_path("global.pot")
-move_generated_file("global.pot")
+generate_file_in_path(file_name)
+move_generated_file(file_name)
